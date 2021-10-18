@@ -1,4 +1,4 @@
-package models
+package cns
 
 type IbcClientInfo struct {
 	ChainName           string   `db:"chain_name"`

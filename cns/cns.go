@@ -1,4 +1,4 @@
-package models
+package cns
 
 import (
 	"database/sql/driver"
