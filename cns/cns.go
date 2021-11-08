@@ -26,6 +26,7 @@ type Chain struct {
 	DerivationPath   string         `diff:"-" db:"derivation_path" binding:"required,derivationpath" json:"derivation_path"`                        // chain derivation path
 	SupportedWallets pq.StringArray `diff:"-" db:"supported_wallets" binding:"required" json:"supported_wallets"`                                   // the list of supported wallets
 	BlockExplorer    string         `diff:"-" db:"block_explorer" json:"block_explorer"`                                                            // block explorer url
+	PublicNodeEndpoints         PublicNodeEndpoints       `diff:"-" db:"public_node_endpoints" binding:"dive" json:"public_node_endpoints,omitempty"` // endpoints for non-natively supported chains                                              // info required to query full-node (e.g. to submit tx)
 }
 
 // VerifiedTokens returns a DenomList of native denoms that are verified.
@@ -126,6 +127,13 @@ type NodeInfo struct {
 	Endpoint     string       `binding:"required" json:"endpoint"`
 	ChainID      string       `binding:"required" json:"chain_id"`
 	Bech32Config Bech32Config `binding:"required,dive" json:"bech32_config"`
+}
+
+// PublicNodeEndpoints holds information for experimental chains, i.e. not natively supported by our wallets.
+// This enables the "Suggest Chain" feature in the front-end
+type PublicNodeEndpoints struct {
+	TendermintRPC	string       `binding:"required,cosmosrpcurl" json:"tendermint_rpc"`
+	CosmosAPI      	string       `binding:"required,cosmosrpcurl" json:"cosmos_api"`
 }
 
 // Scan is the sql.Scanner implementation for DbStringMap.
