@@ -10,7 +10,6 @@ import (
 	"github.com/gin-gonic/gin/binding"
 
 	"github.com/go-playground/validator/v10"
-
 )
 
 const maxPort = 65535
@@ -36,6 +35,10 @@ func CosmosRPCURL(structValidator binding.StructValidator) {
 }
 
 func validateCosmosRpcUrl(value string) error {
+
+	if value == "" {
+		return nil
+	}
 
 	url, err := url.Parse(value)
 	if err != nil {
