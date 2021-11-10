@@ -202,6 +202,8 @@ func TestDerivationPath(t *testing.T) {
 	validation.DerivationPath(binding.Validator)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			// act
 			e := binding.Validator.ValidateStruct(tt.testStruct)
 

@@ -47,6 +47,34 @@ func TestCosmosRpcValidation(t *testing.T) {
 			"",
 		},
 		{
+			"Correct URL - http",
+			test{
+				"http://123.123.123.123:1234",
+			},
+			"",
+		},
+		{
+			"Correct URL - Contains user with pwd",
+			test{
+				"https://user:password@hostname:1234",
+			},
+			"",
+		},
+		{
+			"Correct URL - Contains path",
+			test{
+				"https://hostname.com:1234/some/path",
+			},
+			"",
+		},
+		{
+			"Correct URL - HTTP, path, user",
+			test{
+				"http://user:pwd@hostname.com:1234/some/path",
+			},
+			"",
+		},
+		{
 			"Accepted value - Empty",
 			test{
 				"",
@@ -61,13 +89,6 @@ func TestCosmosRpcValidation(t *testing.T) {
 			"malformed url",
 		},
 		{
-			"Incorrect URL - HTTP",
-			test{
-				"http://123.123.123.123:1234",
-			},
-			"unsupported URL scheme http",
-		},
-		{
 			"Incorrect URL - Other",
 			test{
 				"tcp://hostname:1234",
@@ -75,11 +96,11 @@ func TestCosmosRpcValidation(t *testing.T) {
 			"unsupported URL scheme tcp",
 		},
 		{
-			"Incorrect URL - Contains user",
+			"Incorrect URL - Contains user without pwd",
 			test{
 				"https://user@hostname:1234",
 			},
-			"URL cannot contain user",
+			"URL cannot contain user without password",
 		},
 		{
 			"Incorrect URL - No port",
@@ -103,31 +124,26 @@ func TestCosmosRpcValidation(t *testing.T) {
 			"invalid port 70000",
 		},
 		{
-			"Incorrect URL - Pat",
-			test{
-				"https://hostname:123/test",
-			},
-			"URL cannot contain path info",
-		},
-		{
 			"Incorrect URL - Fragment",
 			test{
-				"https://hostname:123#test",
+				"https://hostname:123/path#test",
 			},
-			"URL cannot contain path info",
+			"URL cannot contain fragments or query params",
 		},
 		{
 			"Incorrect URL - Query",
 			test{
-				"https://hostname:123?test=1",
+				"https://hostname:123/path?test=1",
 			},
-			"URL cannot contain path info",
+			"URL cannot contain fragments or query params",
 		},
 	}
 	// arrange
 	validation.CosmosRPCURL(binding.Validator)
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			// act
 			e := binding.Validator.ValidateStruct(tt.testStruct)
 

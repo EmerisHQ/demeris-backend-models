@@ -71,22 +71,25 @@ func JSONFields(structValidator binding.StructValidator) {
 
 func DerivationPath(structValidator binding.StructValidator) {
 	if v, ok := structValidator.Engine().(*validator.Validate); ok {
-		if err := v.RegisterValidation("derivationpath", func(fl validator.FieldLevel) bool {
-			path, ok := fl.Field().Interface().(string)
-			if !ok {
-				return false
-			}
-
-			if err := validateDerivationPath(path); err != nil {
-				return false
-			}
-
-			return true
-		}); err != nil {
+		if err := v.RegisterValidation("derivationpath", registerDerivationPathValidation); err != nil {
 			panic(err)
 		}
 	}
 }
+
+func registerDerivationPathValidation(fl validator.FieldLevel) bool {
+	path, ok := fl.Field().Interface().(string)
+	if !ok {
+		return false
+	}
+
+	if err := validateDerivationPath(path); err != nil {
+		return false
+	}
+
+	return true
+}
+
 func validateDerivationPath(dp string) error {
 	if _, err := accounts.ParseDerivationPath(dp); err != nil {
 		return err
