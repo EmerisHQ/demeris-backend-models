@@ -36,10 +36,11 @@ func TestChainBinding(t *testing.T) {
 	validation.CosmosRPCURL(binding.Validator)
 	validation.DerivationPath(binding.Validator)
 	validation.JSONFields(binding.Validator)
-	cnsStruct := cns.Chain{}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			cnsStruct := cns.Chain{}
+
 			req := requestWithBody(tt.testJson)
 			err := binding.JSON.Bind(req, &cnsStruct)
 

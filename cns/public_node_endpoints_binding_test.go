@@ -14,11 +14,6 @@ import (
 // Validate that both fields are filled or empty
 func TestPublicNodeEndpointsBinding(t *testing.T) {
 
-	testStruct := struct {
-		Field1              string                  `json:"field1"`
-		PublicNodeEndpoints cns.PublicNodeEndpoints `binding:"omitempty" json:"public_node_endpoints,omitempty"`
-	}{}
-
 	tests := []struct {
 		name     string
 		testJson string
@@ -55,6 +50,11 @@ func TestPublicNodeEndpointsBinding(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			testStruct := struct {
+				Field1              string                  `json:"field1"`
+				PublicNodeEndpoints cns.PublicNodeEndpoints `binding:"dive" json:"public_node_endpoints,omitempty"`
+			}{}
+
 			req := requestWithBody(tt.testJson)
 			err := binding.JSON.Bind(req, &testStruct)
 
