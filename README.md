@@ -28,3 +28,15 @@ gsora@BFG ~/T/n/backend-models (main)> tree -C
     ├── sqlc.json
     └── tracelistener.go
 ```
+## Custom tags
+
+The module defines the following struct tags
+
+* `binding:"derivationpath"`  
+  A field's value conforms to a [key derivation path](https://learnmeabitcoin.com/technical/derivation-paths). 
+* `binding:"cosmosrpcurl"`  
+  A field contains a valid Cosmos RPC URL (`https://host:port`).  
+  The implementation extends the definition to allow for:
+  * `http` for local/DEV
+  * BASIC auth (e.g. `https://username:pwd@host:port`) for private RPCs
+  * path info (e.g. `https://host:port/foo/bar`) for PRCs behind an API gateway 
