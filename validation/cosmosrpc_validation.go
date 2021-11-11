@@ -63,7 +63,7 @@ func validateCosmosRpcUrl(value string) error {
 
 	_, port, err := net.SplitHostPort(parsedUrl.Host)
 	if err != nil {
-		return fmt.Errorf("invalid host:port %s", parsedUrl.Host)
+		return fmt.Errorf("invalid host:port %s, %w", parsedUrl.Host, err)
 	}
 
 	x, err := strconv.Atoi(port)
