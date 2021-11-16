@@ -129,6 +129,24 @@ type NodeInfo struct {
 	Bech32Config Bech32Config `binding:"required,dive" json:"bech32_config"`
 }
 
+// Scan is the sql.Scanner implementation for DbStringMap.
+func (a *NodeInfo) Scan(value interface{}) error {
+	b, ok := value.([]byte)
+	if !ok {
+		return errors.New("type assertion to []byte failed")
+	}
+
+	err := json.Unmarshal(b, &a)
+	if err != nil {
+		return err
+	}
+
+	b = nil
+	value = nil
+
+	return nil
+}
+
 // PublicNodeEndpoints holds information for experimental chains, i.e. not natively supported by our wallets.
 // This enables the "Suggest Chain" feature in the front-end
 type PublicNodeEndpoints struct {
@@ -136,8 +154,8 @@ type PublicNodeEndpoints struct {
 	CosmosAPI     string `binding:"required_with=TendermintRPC,cosmosrpcurl" json:"cosmos_api"`
 }
 
-// Scan is the sql.Scanner implementation for DbStringMap.
-func (a *NodeInfo) Scan(value interface{}) error {
+// Scan is the sql.Scanner implementation for PublicNodeEndpoints.
+func (a *PublicNodeEndpoints) Scan(value interface{}) error {
 	b, ok := value.([]byte)
 	if !ok {
 		return errors.New("type assertion to []byte failed")
