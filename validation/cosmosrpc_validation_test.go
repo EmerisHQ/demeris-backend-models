@@ -3,14 +3,15 @@ package validation_test
 import (
 	"errors"
 	"fmt"
+	"testing"
+
 	"github.com/allinbits/demeris-backend-models/validation"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 type test struct {
-	url string `binding:cosmosrpcurl`
+	url string `binding:cosmosrpcurl` //nolint: govet
 }
 
 func TestCosmosRpcValidation(t *testing.T) {
