@@ -9,7 +9,7 @@ import (
 )
 
 type test struct {
-	Url string `binding:"cosmosrpcurl"`
+	Url string `binding:"cosmosrpcurl"` //nolint: govet
 }
 
 func TestCosmosRpcValidation(t *testing.T) {
