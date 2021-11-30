@@ -5,9 +5,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/lib/pq"
+	"golang.org/x/mod/semver"
 )
 
 // Chain represents CNS chain metadata row on the database.
@@ -67,6 +69,11 @@ func (c Chain) RelayerToken() Denom {
 	}
 
 	panic("relayer token not defined")
+}
+
+func (c Chain) MajorSDKVersion() string {
+	rawVersion := semver.MajorMinor(c.CosmosSDKVersion)
+	return strings.Split(rawVersion, ".")[1]
 }
 
 // Threshold is a database-friendly time.Duration.
