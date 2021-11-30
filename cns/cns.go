@@ -27,6 +27,7 @@ type Chain struct {
 	SupportedWallets    pq.StringArray      `diff:"-" db:"supported_wallets" binding:"required" json:"supported_wallets"`                                   // the list of supported wallets
 	BlockExplorer       string              `diff:"-" db:"block_explorer" json:"block_explorer"`                                                            // block explorer url
 	PublicNodeEndpoints PublicNodeEndpoints `diff:"-" db:"public_node_endpoints" binding:"dive" json:"public_node_endpoints,omitempty"`                     // endpoints for non-natively supported chains
+	CosmosSDKVersion    string              `diff:"-" db:"cosmos_sdk_version" binding:"required,semver" json:"cosmos_sdk_version,omitempty"`                // Cosmos SDK version used by the chain
 }
 
 // VerifiedTokens returns a DenomList of native denoms that are verified.

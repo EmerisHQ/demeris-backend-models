@@ -36,6 +36,7 @@ func TestChainBinding(t *testing.T) {
 	validation.CosmosRPCURL(binding.Validator)
 	validation.DerivationPath(binding.Validator)
 	validation.JSONFields(binding.Validator)
+	validation.Semver(binding.Validator)
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -50,7 +51,7 @@ func TestChainBinding(t *testing.T) {
 			if tt.fails {
 				assert.Error(t, err)
 			} else {
-				assert.Nil(t, err)
+				assert.NoError(t, err)
 			}
 		})
 	}
@@ -103,7 +104,8 @@ const (
 	"valid_block_thresh": "32m",
 	"derivation_path": "m/44'/0'/0'",
 	"supported_wallets": ["Keplr", "Some other"],
-	"block_explorer": "https://explorer.com"
+	"block_explorer": "https://explorer.com",
+	"cosmos_sdk_version": "v0.42.42"
 `
 
 	ChainWithoutPublicNodeEndpoints = `{` + DefaultFields + `}`
