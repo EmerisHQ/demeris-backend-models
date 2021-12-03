@@ -246,3 +246,40 @@ func (b ValidatorRow) WithChainName(cn string) DatabaseEntrier {
 	b.ChainName = cn
 	return b
 }
+
+type RedelegationRow struct {
+	TracelistenerDatabaseRow
+
+	Delegator           string              `db:"delegator_address" json:"delegator"`
+	ValidatorSrcAddress string              `db:"validator_src_address" json:"validator_src_address"`
+	ValidatorDstAddress string              `db:"validator_dst_address" json:"validator_dst_address"`
+	Entries             RedelegationEntries `db:"entries" json:"entries"`
+}
+
+type RedelegationEntry struct {
+	CreationHeight int64  `db:"creation_height" json:"creation_height"`
+	CompletionTime string `db:"completion_time" json:"completion_time"`
+	InitialBalance string `db:"initial_balance" json:"initial_balance"`
+	SharesDst      string `db:"shares_dst" json:"shares_dst"`
+}
+
+type RedelegationEntries []RedelegationEntry
+
+// WithChainName implements the DatabaseEntrier interface.
+func (b RedelegationRow) WithChainName(cn string) DatabaseEntrier {
+	b.ChainName = cn
+	return b
+}
+
+func (entries *RedelegationEntries) Scan(src interface{}) error {
+	var data []byte
+	switch v := src.(type) {
+	case []byte:
+		data = v
+	case string:
+		data = []byte(v)
+	default:
+		return nil // or return some error
+	}
+	return json.Unmarshal(data, entries)
+}
