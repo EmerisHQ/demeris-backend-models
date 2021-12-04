@@ -1,4 +1,4 @@
-all: lint test
+all: test
 
 lint:
 	golangci-lint run ./...
