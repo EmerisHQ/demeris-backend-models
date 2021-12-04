@@ -1,6 +1,7 @@
-all:
+all: lint test
+
+lint:
 	golangci-lint run ./...
-	go build ./...
 
 test:
 	go test -v -race ./...
