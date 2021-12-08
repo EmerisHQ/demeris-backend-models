@@ -3,6 +3,10 @@ name: Execute tests
 on:
   workflow_dispatch:
   push:
+permissions:
+  contents: read
+env:
+  GOPRIVATE: "github.com/allinbits/*"
 
 jobs:
   test:
@@ -18,11 +22,7 @@ jobs:
 
       - name: Setup token for pulling from allinbits private repos
         run: |
-          go env -w GOPRIVATE=github.com/allinbits/*
           git config --global url."https://git:${{ secrets.TENDERBOT_GIT_TOKEN }}@github.com".insteadOf "https://github.com"
 
-      - name: Build
-        run: go build -v ./...
-
       - name: Test
-        run: go test -v ./...
+        run: make test
