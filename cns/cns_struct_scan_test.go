@@ -35,8 +35,6 @@ func TestPublicNodeEndpointScan(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			pne := cns.PublicNodeEndpoints{}
 			err := pne.Scan([]byte(tt.testJson))
 
@@ -54,7 +52,7 @@ func TestPublicNodeEndpointScan(t *testing.T) {
 
 const (
 	PublicNodeEndpointsFullJSON = `{
-		"tendermint_rpc": "https://localhost:1234",
-		"cosmos_api": "https://127.0.01:2345"
+		"tendermint_rpc": ["https://localhost:1234"],
+		"cosmos_api": ["https://127.0.01:2345"]
 	}`
 )
