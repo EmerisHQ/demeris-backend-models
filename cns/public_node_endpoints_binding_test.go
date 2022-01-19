@@ -25,9 +25,14 @@ func TestPublicNodeEndpointsBinding(t *testing.T) {
 			false,
 		},
 		{
+			"PublicNodeEndpoints struct - Both not defined",
+			BothEndpointsNotDefined,
+			false,
+		},
+		{
 			"PublicNodeEndpoints struct - Both empty",
 			BothEndpointsEmpty,
-			false,
+			true,
 		},
 		{
 			"PublicNodeEndpoints struct - Both filled",
@@ -35,13 +40,43 @@ func TestPublicNodeEndpointsBinding(t *testing.T) {
 			false,
 		},
 		{
+			"PublicNodeEndpoints struct - RPC not defined",
+			TendermintRPCNotDefined,
+			true,
+		},
+		{
 			"PublicNodeEndpoints struct - RPC empty",
 			TendermintRPCEmpty,
 			true,
 		},
 		{
+			"PublicNodeEndpoints struct - API not defined",
+			CosmosAPINotDefined,
+			true,
+		},
+		{
 			"PublicNodeEndpoints struct - API empty",
 			CosmosAPIEmpty,
+			true,
+		},
+		{
+			"PublicNodeEndpoints struct - Multiple RPCs",
+			TendermintMultipleRPC,
+			false,
+		},
+		{
+			"PublicNodeEndpoints struct - Multiple APIs",
+			CosmosMultipleAPI,
+			false,
+		},
+		{
+			"PublicNodeEndpoints struct - Invalid RPC value",
+			TendermintRPCInvalid,
+			true,
+		},
+		{
+			"PublicNodeEndpoints struct - Invalid API value",
+			CosmosAPIInvalid,
 			true,
 		},
 	}
@@ -50,8 +85,6 @@ func TestPublicNodeEndpointsBinding(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			testStruct := struct {
 				Field1              string                  `json:"field1"`
 				PublicNodeEndpoints cns.PublicNodeEndpoints `binding:"dive" json:"public_node_endpoints,omitempty"`
@@ -76,18 +109,37 @@ const (
 	"field1": "test"
 }
 `
-	BothEndpointsEmpty = `
+
+	BothEndpointsNotDefined = `
 {
 	"field1": "test",
 	"public_node_endpoints": {}
+}
+`
+
+	BothEndpointsEmpty = `
+{
+	"field1": "test",
+	"public_node_endpoints": {
+		"tendermint_rpc": [],
+		"cosmos_api": []
+	}
 }
 `
 	BothEndpointsFilled = `
 {
 	"field1": "test",
 	"public_node_endpoints": {
-		"tendermint_rpc": "https://localhost:1234",
-		"cosmos_api": "https://localhost:34567"
+		"tendermint_rpc": ["https://localhost:1234"],
+		"cosmos_api": ["https://localhost:34567"]
+	}
+}
+`
+	TendermintRPCNotDefined = `
+{
+	"field1": "test",
+	"public_node_endpoints": {
+		"cosmos_api": ["https://localhost:34567"]
 	}
 }
 `
@@ -95,7 +147,16 @@ const (
 {
 	"field1": "test",
 	"public_node_endpoints": {
-		"cosmos_api": "https://localhost:34567"
+		"cosmos_api": ["https://localhost:34567"],
+		"tendermint_rpc": []
+	}
+}
+`
+	CosmosAPINotDefined = `
+{
+	"field1": "test",
+	"public_node_endpoints": {
+		"tendermint_rpc": ["https://localhost:1234"]
 	}
 }
 `
@@ -103,7 +164,44 @@ const (
 {
 	"field1": "test",
 	"public_node_endpoints": {
-		"tendermint_rpc": "https://localhost:1234"
+		"tendermint_rpc": ["https://localhost:1234"],
+		"cosmos_api": []
+	}
+}
+`
+	TendermintMultipleRPC = `
+{
+	"field1": "test",
+	"public_node_endpoints": {
+		"tendermint_rpc": ["https://localhost:1234","https://localhost:1235"],
+		"cosmos_api": ["https://localhost:34567"]
+	}
+}
+`
+	CosmosMultipleAPI = `
+{
+	"field1": "test",
+	"public_node_endpoints": {
+		"tendermint_rpc": ["https://localhost:1234"],
+		"cosmos_api": ["https://localhost:34567","https://localhost:34566"]
+	}
+}
+`
+	TendermintRPCInvalid = `
+{
+	"field1": "test",
+	"public_node_endpoints": {
+		"tendermint_rpc": ["https"],
+		"cosmos_api": ["https://localhost:34567"]
+	}
+}
+`
+	CosmosAPIInvalid = `
+{
+	"field1": "test",
+	"public_node_endpoints": {
+		"tendermint_rpc": ["https://localhost:1234"],
+		"cosmos_api": ["https"]
 	}
 }
 `

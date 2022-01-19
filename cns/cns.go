@@ -153,8 +153,8 @@ func (a *NodeInfo) Scan(value interface{}) error {
 // PublicNodeEndpoints holds information for experimental chains, i.e. not natively supported by our wallets.
 // This enables the "Suggest Chain" feature in the front-end
 type PublicNodeEndpoints struct {
-	TendermintRPC string `binding:"required_with=CosmosAPI,cosmosrpcurl" json:"tendermint_rpc"`
-	CosmosAPI     string `binding:"required_with=TendermintRPC,cosmosrpcurl" json:"cosmos_api"`
+	TendermintRPC []string `binding:"required_with=CosmosAPI,omitempty,min=1,dive,cosmosrpcurl" json:"tendermint_rpc"`
+	CosmosAPI     []string `binding:"required_with=TendermintRPC,omitempty,min=1,dive,cosmosrpcurl" json:"cosmos_api"`
 }
 
 // Scan is the sql.Scanner implementation for PublicNodeEndpoints.
