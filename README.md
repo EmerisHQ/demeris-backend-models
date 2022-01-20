@@ -44,4 +44,4 @@ The module defines the following struct tags
   The implementation extends the definition to allow for:
   * `http` for local/DEV
   * BASIC auth (e.g. `https://username:pwd@host:port`) for private RPCs
-  * path info (e.g. `https://host:port/foo/bar`) for PRCs behind an API gateway 
+  * path info (e.g. `https://host:port/foo/bar`) for PRCs behind an API gateway
