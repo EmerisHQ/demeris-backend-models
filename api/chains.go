@@ -8,11 +8,13 @@ import (
 type ChainsResponse struct {
 	Chains []SupportedChain `json:"chains"`
 }
+
 type SupportedChain struct {
 	ChainName   string `json:"chain_name"`
 	DisplayName string `json:"display_name"`
 	Logo        string `json:"logo"`
 }
+
 type ChainResponse struct {
 	Chain cns.Chain `json:"chain"`
 }
@@ -28,10 +30,12 @@ type FeeResponse struct {
 type FeeAddressResponse struct {
 	FeeAddress []string `json:"fee_address"`
 }
+
 type FeeAddress struct {
 	ChainName  string   `json:"chain_name"`
 	FeeAddress []string `json:"fee_address"`
 }
+
 type FeeAddressesResponse struct {
 	FeeAddresses []FeeAddress `json:"fee_addresses"`
 }
@@ -48,6 +52,7 @@ type PrimaryChannel struct {
 type PrimaryChannelResponse struct {
 	Channel PrimaryChannel `json:"primary_channel"`
 }
+
 type PrimaryChannelsResponse struct {
 	Channels []PrimaryChannel `json:"primary_channels"`
 }
