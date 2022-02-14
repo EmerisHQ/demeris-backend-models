@@ -41,7 +41,7 @@ type UnbondingDelegation struct {
 	ChainName        string                                   `json:"chain_name"`
 }
 
-type NumbersResponse struct {
+type AccountNumbersResponse struct {
 	Numbers []tracelistener.AuthRow `json:"numbers"`
 }
 
