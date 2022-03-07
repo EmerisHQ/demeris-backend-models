@@ -1,10 +1,14 @@
-module github.com/allinbits/demeris-backend-models
+module github.com/emerishq/demeris-backend-models
 
 go 1.17
 
 replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 
 require (
+<<<<<<< Updated upstream
+=======
+	github.com/emerishq/emeris-utils v1.0.1
+>>>>>>> Stashed changes
 	github.com/ethereum/go-ethereum v1.10.15
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-playground/universal-translator v0.18.0

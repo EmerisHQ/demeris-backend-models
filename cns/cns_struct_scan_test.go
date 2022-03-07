@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/allinbits/demeris-backend-models/cns"
+	"github.com/emerishq/demeris-backend-models/cns"
 )
 
 func TestPublicNodeEndpointScan(t *testing.T) {
