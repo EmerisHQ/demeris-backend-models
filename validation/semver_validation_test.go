@@ -3,7 +3,7 @@ package validation_test
 import (
 	"testing"
 
-	"github.com/allinbits/demeris-backend-models/validation"
+	"github.com/emerishq/demeris-backend-models/validation"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/stretchr/testify/require"
 )
