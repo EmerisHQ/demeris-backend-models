@@ -16,7 +16,6 @@ require (
 
 require (
 	github.com/btcsuite/btcd v0.21.0-beta // indirect
-	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect

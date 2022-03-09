@@ -1,9 +1,9 @@
 # `demeris-backend-models`
 
-[![codecov](https://codecov.io/gh/allinbits/demeris-backend-models/branch/main/graph/badge.svg?token=U1YDBROZJ3)](https://codecov.io/gh/allinbits/demeris-backend-models)
-[![Build status](https://github.com/allinbits/demeris-backend-models/workflows/Build/badge.svg)](https://github.com/allinbits/demeris-backend-models/commits/main)
-[![Tests status](https://github.com/allinbits/demeris-backend-models/workflows/Tests/badge.svg)](https://github.com/allinbits/demeris-backend-models/commits/main)
-[![Lint](https://github.com/allinbits/demeris-backend-models/workflows/Lint/badge.svg?token)](https://github.com/allinbits/demeris-backend-models/commits/main)
+[![codecov](https://codecov.io/gh/emerishq/demeris-backend-models/branch/main/graph/badge.svg?token=U1YDBROZJ3)](https://codecov.io/gh/emerishq/demeris-backend-models)
+[![Build status](https://github.com/emerishq/demeris-backend-models/workflows/Build/badge.svg)](https://github.com/emerishq/demeris-backend-models/commits/main)
+[![Tests status](https://github.com/emerishq/demeris-backend-models/workflows/Tests/badge.svg)](https://github.com/emerishq/demeris-backend-models/commits/main)
+[![Lint](https://github.com/emerishq/demeris-backend-models/workflows/Lint/badge.svg?token)](https://github.com/emerishq/demeris-backend-models/commits/main)
 
 This repository holds all the Demeris backend models, mostly made up of SQL table definitions and generated code created with [`sqlc`](https://github.com/kyleconroy/sqlc).
 
