@@ -13,7 +13,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/allinbits/demeris-backend-models/validation"
+	"github.com/emerishq/demeris-backend-models/validation"
 )
 
 // ----- Missing Fields test ----

@@ -1,4 +1,4 @@
-module github.com/allinbits/demeris-backend-models
+module github.com/emerishq/demeris-backend-models
 
 go 1.17
 
