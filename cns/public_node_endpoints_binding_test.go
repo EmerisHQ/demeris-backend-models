@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/allinbits/demeris-backend-models/cns"
-	"github.com/allinbits/demeris-backend-models/validation"
+	"github.com/emerishq/demeris-backend-models/cns"
+	"github.com/emerishq/demeris-backend-models/validation"
 
 	"github.com/gin-gonic/gin/binding"
 )
