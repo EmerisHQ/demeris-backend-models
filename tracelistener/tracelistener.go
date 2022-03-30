@@ -10,6 +10,7 @@ import (
 type TracelistenerDatabaseRow struct {
 	ChainName string `db:"chain_name" json:"chain_name"`
 	ID        uint64 `db:"id" json:"-"`
+	Height    uint64 `db:"height" json:"block_height"`
 }
 
 // DatabaseEntrier is implemented by each object that wants to be inserted in a database.
@@ -23,10 +24,9 @@ type DatabaseEntrier interface {
 type BalanceRow struct {
 	TracelistenerDatabaseRow
 
-	Address     string `db:"address" json:"address"`
-	Amount      string `db:"amount" json:"amount"`
-	Denom       string `db:"denom" json:"denom"`
-	BlockHeight uint64 `db:"height" json:"block_height"`
+	Address string `db:"address" json:"address"`
+	Amount  string `db:"amount" json:"amount"`
+	Denom   string `db:"denom" json:"denom"`
 }
 
 // WithChainName implements the DatabaseEntrier interface.
@@ -39,10 +39,9 @@ func (b BalanceRow) WithChainName(cn string) DatabaseEntrier {
 type DelegationRow struct {
 	TracelistenerDatabaseRow
 
-	Delegator   string `db:"delegator_address" json:"delegator"`
-	Validator   string `db:"validator_address" json:"validator"`
-	Amount      string `db:"amount" json:"amount"`
-	BlockHeight uint64 `db:"height" json:"block_height"`
+	Delegator string `db:"delegator_address" json:"delegator"`
+	Validator string `db:"validator_address" json:"validator"`
+	Amount    string `db:"amount" json:"amount"`
 }
 
 // WithChainName implements the DatabaseEntrier interface.
