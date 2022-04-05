@@ -8,10 +8,10 @@ import (
 // TracelistenerDatabaseRow contains a list of all the fields each database row must contain in order to be
 // inserted correctly.
 type TracelistenerDatabaseRow struct {
-	ChainName    string `db:"chain_name" json:"chain_name"`
-	ID           uint64 `db:"id" json:"-"`
-	Height       uint64 `db:"height" json:"block_height"`
-	DeleteHeight uint64 `db:"delete_height" json:"-"`
+	ChainName    string  `db:"chain_name" json:"chain_name"`
+	ID           uint64  `db:"id" json:"-"`
+	Height       uint64  `db:"height" json:"block_height"`
+	DeleteHeight *uint64 `db:"delete_height" json:"-"`
 }
 
 // DatabaseEntrier is implemented by each object that wants to be inserted in a database.
