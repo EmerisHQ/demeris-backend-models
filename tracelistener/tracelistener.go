@@ -220,6 +220,7 @@ func (entries *UnbondingDelegationEntries) Scan(src interface{}) error {
 type ValidatorRow struct {
 	TracelistenerDatabaseRow
 
+	ValidatorAddress     string `db:"validator_address" json:"validator_address"`
 	OperatorAddress      string `db:"operator_address" json:"operator_address"`
 	ConsensusPubKeyType  string `db:"consensus_pubkey_type" json:"consensus_pubkey_type"`
 	ConsensusPubKeyValue []byte `db:"consensus_pubkey_value" json:"consensus_pubkey_value"`
