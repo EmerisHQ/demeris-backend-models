@@ -36,6 +36,38 @@ func (b BalanceRow) WithChainName(cn string) DatabaseEntrier {
 	return b
 }
 
+// CW20BalanceRow represents a cw20 balance row inserted into the database.
+type CW20BalanceRow struct {
+	TracelistenerDatabaseRow
+
+	ContractAddress string `db:"contract_address" json:"contract_address"`
+	Address         string `db:"address" json:"address"`
+	Amount          string `db:"amount" json:"amount"`
+}
+
+// WithChainName implements the DatabaseEntrier interface.
+func (b CW20BalanceRow) WithChainName(cn string) DatabaseEntrier {
+	b.ChainName = cn
+	return b
+}
+
+// CW20TokenInfoRow represents a cw20 token info row inserted into the database.
+type CW20TokenInfoRow struct {
+	TracelistenerDatabaseRow
+
+	ContractAddress string `db:"contract_address" json:"contract_address"`
+	Name            string `db:"name" json:"name"`
+	Symbol          string `db:"symbol" json:"symbol"`
+	Decimals        int    `db:"decimals" json:"decimals"`
+	TotalSupply     string `db:"total_supply" json:"total_supply"`
+}
+
+// WithChainName implements the DatabaseEntrier interface.
+func (b CW20TokenInfoRow) WithChainName(cn string) DatabaseEntrier {
+	b.ChainName = cn
+	return b
+}
+
 // DelegationRow represents a delegation row inserted into the database.
 type DelegationRow struct {
 	TracelistenerDatabaseRow
